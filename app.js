@@ -22,23 +22,16 @@ let db = getDatabase(app);
 
 
 //filter values 
-let EventNameElem = document.getElementById("fname");
+// let EventNameElem = document.getElementById("fname");
 let EventCategoryElem = document.getElementById("EventCategory");
 let EventPinCode = document.getElementById("EventPinCode");
 let EventStartDate = document.getElementById("EventStartDate");
 let SearchResultContainer = document.getElementById("Searchresult");
 let seeAllEventBtn = document.getElementById("SeeAllEvents");
 let SaveEventsBtn = document.getElementById("SaveEvents");
+let ApplyfilterBtn = document.getElementById("ApplyFilter");
+let ReloadBtn = document.getElementById("ClearFilters");
 let EventsData = [];
-
-// function GetAllData(){
-//     const userRef =ref(db,'Events');
-//     get(userRef).then((snapshot)=>{
-//         snapshot.forEach(childSnaps  => {
-//             console.log(childSnaps.val());
-//         });
-//     });
-// }
 
 seeAllEventBtn.addEventListener("click",()=>{
     GetAllData();
@@ -55,11 +48,92 @@ SaveEventsBtn.addEventListener("click",()=>{
     }
 });
 
+ApplyfilterBtn.addEventListener("click",()=>{
+    GetFilteredData();
+    //createCSVDownload(EventsData);
+});
 
-function GetFilteredData(){
+ReloadBtn.addEventListener("click",()=>{
+    location.reload();
+});
+
+function GetFilteredData() {
+    const category = EventCategoryElem.value.trim();
+    const pinCode = EventPinCode.value.trim();
+    const startDate = EventStartDate.value.trim();
+
+    const pinCodeInt = parseInt(pinCode, 10);
+    const pinCodeMin = pinCodeInt - 6;
+    const pinCodeMax = pinCodeInt + 6;
+
     const userRef = ref(db, 'Events');
+    get(userRef).then((snapshot) => {
+        EventsData = []; // Clear the EventsData array
 
+        const searchResultDiv = document.getElementById("Searchresult");
+        searchResultDiv.innerHTML = ""; // Clear previous results
+
+        if (snapshot.exists()) {
+            snapshot.forEach((childSnap) => {
+                const eventData = childSnap.val();
+                const eventPinCode = parseInt(eventData.EventPincode, 10);
+                const eventStartDate = eventData.EventStartDate;
+
+                // Filter data in JavaScript
+                if (
+                    (!category || eventData.EventCategory === category) &&
+                    (!pinCode || (eventPinCode >= pinCodeMin && eventPinCode <= pinCodeMax)) &&
+                    (!startDate || eventStartDate === startDate)
+                ) {
+                    EventsData.push(eventData);
+
+                    // Create a card for each filtered event
+                    const eventCard = `
+                        <div class="event-card">
+                            <h3>${eventData.EventName || "Unnamed Event"}</h3>
+                            <p><strong>Pincode:</strong> ${eventData.EventPincode}</p>
+                            <p><strong>Category:</strong> ${eventData.EventCategory}</p>
+                            <p><strong>Start Date:</strong> ${eventData.EventStartDate}</p>
+                            <p><strong>Start Time:</strong> ${eventData.EventStartTime}</p>
+                            <p><strong>End Date:</strong> ${eventData.EventEndDate}</p>
+                            <p><strong>End Time:</strong> ${eventData.EventEndTime}</p>
+                        </div>
+                    `;
+
+                    // Append the card to the results div
+                    searchResultDiv.innerHTML += eventCard;
+                }
+            });
+
+            if (EventsData.length === 0) {
+                searchResultDiv.innerHTML = "<p>No matching events found.</p>";
+                console.log("No matching events found.");
+            }
+        } else {
+            searchResultDiv.innerHTML = "<p>No events found in the database.</p>";
+            console.error("No events found in the database.");
+        }
+    }).catch((error) => {
+        const searchResultDiv = document.getElementById("Searchresult");
+        searchResultDiv.innerHTML = `<p>Error fetching data: ${error.message}</p>`;
+        console.error("Error fetching data:", error);
+    });
 }
+
+
+
+
+
+
+// function GetAllData(){
+//     const userRef =ref(db,'Events');
+//     get(userRef).then((snapshot)=>{
+//         snapshot.forEach(childSnaps  => {
+//             console.log(childSnaps.val());
+//         });
+//     });
+// }
+
 
 function GetAllData() {
     const userRef = ref(db, 'Events');
@@ -68,9 +142,9 @@ function GetAllData() {
         if (snapshot.exists()) {
             snapshot.forEach(childSnaps => {
                 const eventData = childSnaps.val();
-                console.log(childSnaps);
+                //console.log(childSnaps);
                 EventsData.push(eventData); // Save data to EventsData array
-                console.log(eventData);
+                //console.log(eventData);
                 
                 // Create a new div for each event
                 const eventDiv = document.createElement("div");
@@ -304,7 +378,7 @@ function createCSVworks(data) {
 
 function createCSVDownload(data) {
     // Create the CSV header
-    const header = ["LAtLongData", "name", "description"];
+    const header = ["WKT", "name", "description"];
     
     // Create rows from event data
     const rows = data.map(event => {
