@@ -1,0 +1,256 @@
+/* General Reset */
+body, h1, h2, h3, p, div, input, select, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'San Francisco', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: linear-gradient(to bottom, #fdfbfb, #ece9e6);
+    color: #333;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 50px 20px;
+    background: #f8f9fa;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.heading {
+    font-size: 3.5rem;
+    color: #333;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+}
+
+.heading2 {
+    font-size: 1.8rem;
+    color: #666;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.StatusUpdate {
+    font-size: 1.2rem;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+/* Navigation */
+#navdiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+nav {
+    width: auto;
+    display: flex;
+    justify-content: center; /* Centers the nav links */
+    gap: 25px;
+    padding: 10px 0;
+    margin: 0 auto;
+}
+
+nav a {
+    color: #0077cc;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 8px 20px;
+    border-radius: 25px;
+    border: 1px solid transparent;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+nav a:hover {
+    background: #e3f2fd;
+    color: #0056b3;
+    border: 1px solid #0056b3;
+}
+
+/* Form Styling */
+form {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+legend {
+    font-size: 2rem;
+    color: #0077cc;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #333;
+}
+
+input, select {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 25px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #f9f9f9;
+    font-size: 1.1rem;
+    color: #333;
+    transition: border 0.3s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #0077cc;
+    background: #ffffff;
+    box-shadow: 0 0 6px rgba(0, 119, 204, 0.4);
+}
+
+/* Buttons */
+#Buttons {
+    text-align: center;
+    margin: 30px 0;
+}
+
+button {
+    padding: 12px 25px;
+    margin: 10px;
+    background: #0077cc;
+    color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block;
+}
+
+button:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Centering Save Event Button */
+.savebutton {
+    display: block;
+    width: auto;
+    margin: 30px auto; /* Centering the button */
+}
+
+/* Status Update */
+#navdiv {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.StatusUpdate {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #f8f9fa;
+    color: #888;
+    font-size: 0.9rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 30px 10px;
+    }
+
+    .heading {
+        font-size: 3rem;
+    }
+
+    .heading2 {
+        font-size: 1.5rem;
+    }
+
+    .StatusUpdate {
+        font-size: 1.1rem;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    nav a {
+        font-size: 1rem;
+        padding: 10px 0;
+    }
+
+    form {
+        padding: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .heading {
+        font-size: 2.5rem;
+    }
+
+    .heading2 {
+        font-size: 1.2rem;
+    }
+
+    .StatusUpdate {
+        font-size: 1rem;
+    }
+
+    nav {
+        gap: 10px;
+    }
+
+    nav a {
+        padding: 5px 10px;
+        font-size: 0.9rem;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    input, select {
+        font-size: 1rem;
+    }
+
+    button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}

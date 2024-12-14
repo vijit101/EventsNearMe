@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Event Finder</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header>
+        <h1 class="heading">Event Near me</h1>
+        <h2 class="heading2">Local Event Finder</h2>
+        <h3>Add Filters to find the Events</h3>
+        <div id="navdiv" name="navdiv">
+            <nav id="MainNavigation" name="MainNavigation">
+                <hr>
+                <a href="index.html">Home</a>
+                <a href="EventRegistration.html">Events Registration</a>
+                <hr>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <form autocomplete="on">
+            <fieldset>
+                <br />
+                <legend>Event Information</legend>
+                <label for="fname">Event Name </label>
+                <input type="text" id="fname" />
+                <br />
+                <br />
+                <label for="EventPinCode">Enter the Pincode you want to search the Event for</label>
+                <input type="number" id="EventPinCode" required />
+                <br />
+                <br />
+                <label for="EventCategory">Choose an Event Category</label>
+
+                <select name="Event Category" id="EventCategory" required>
+                    <option value="Poetry">Poetry</option>
+                    <option value="Gaming">Gaming</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Cooking">Cooking</option>
+                    <option value="Music">Music</option>
+                    <option value="Art">Art</option>
+                    <option value="Dance">Dance</option>
+                    <option value="Dating">Dating</option>
+                    <option value="Marriage">Marriage</option>
+                    <option value="Party">Party</option>
+                    <option value="Others">Others</option>
+                </select>
+                <br />
+                <br />
+                <label for="EventStartDate">search for Date</label>
+                <input type="datetime" id="EventStartDate" />
+                <br />
+                <br />
+            </fieldset>
+        </form>
+
+        <div id="Buttons">
+            <button id="SeeAllEvents">All Events</button>
+            <button id="ApplyFilter">Apply Filter</button>
+            <button id="ClearFilters">Reload Page</button>
+            <button id="SaveEvents">Save Events to Gmap</button>
+        </div>
+
+        <div id="Searchresult">
+
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+    <script src="./jQuery.js"></script>
+    <script type="module" src="./app.js"></script>
+</body>
+
+</html>
