@@ -57,7 +57,8 @@ SaveEventsBtn.addEventListener("click",()=>{
 
 
 function GetFilteredData(){
-    
+    const userRef = ref(db, 'Events');
+
 }
 
 function GetAllData() {
@@ -303,7 +304,7 @@ function createCSVworks(data) {
 
 function createCSVDownload(data) {
     // Create the CSV header
-    const header = ["WKT", "name", "description"];
+    const header = ["LAtLongData", "name", "description"];
     
     // Create rows from event data
     const rows = data.map(event => {
@@ -380,7 +381,7 @@ function createCSVDownload(data) {
                     </a>
                 </li>
             </ol>
-            <a href="${csvURL}" download="events_data.csv" class="btn">Download CSV</a>
+            <a href="${csvURL}" download="Events.csv" class="btn">Download CSV</a>
         </body>
         </html>
     `;
