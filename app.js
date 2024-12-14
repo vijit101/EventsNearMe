@@ -136,30 +136,34 @@ function GetFilteredData() {
 
 
 function GetAllData() {
+    // Clear the SearchResultContainer and EventsData array
+    SearchResultContainer.innerHTML = ""; // Clear previous results
+    EventsData = []; // Reset the EventsData array
+
     const userRef = ref(db, 'Events');
 
     get(userRef).then((snapshot) => {
         if (snapshot.exists()) {
             snapshot.forEach(childSnaps => {
                 const eventData = childSnaps.val();
-                //console.log(childSnaps);
                 EventsData.push(eventData); // Save data to EventsData array
-                //console.log(eventData);
                 
                 // Create a new div for each event
                 const eventDiv = document.createElement("div");
-                eventDiv.className = "Events";
+                eventDiv.className = "event-card"; // Using the previously styled CSS class
 
                 // Add event details as inner HTML
                 eventDiv.innerHTML = `
                     <h3>${childSnaps.key}</h3>
-                    <p><strong>Pincode:</strong> ${eventData.EventPincode}</p>
-                    <p><strong>LatLong:</strong> ${eventData.EventLatLong}</p>
-                    <p><strong>Category:</strong> ${eventData.EventCategory}</p>
-                    <p><strong>Start Date:</strong> ${eventData.EventStartDate}</p>
-                    <p><strong>Start Time:</strong> ${eventData.EventStartTime}</p>
-                    <p><strong>End Date:</strong> ${eventData.EventEndDate}</p>
-                    <p><strong>End Time:</strong> ${eventData.EventEndTime}</p>
+                    <div class="details">
+                        <p class="meta"><strong>Pincode:</strong> ${eventData.EventPincode}</p>
+                        <p class="meta"><strong>LatLong:</strong> ${eventData.EventLatLong}</p>
+                        <p class="meta"><strong>Category:</strong> ${eventData.EventCategory}</p>
+                        <p class="meta"><strong>Start Date:</strong> ${eventData.EventStartDate}</p>
+                        <p class="meta"><strong>Start Time:</strong> ${eventData.EventStartTime}</p>
+                        <p class="meta"><strong>End Date:</strong> ${eventData.EventEndDate}</p>
+                        <p class="meta"><strong>End Time:</strong> ${eventData.EventEndTime}</p>
+                    </div>
                 `;
 
                 // Append the div to the SearchResultContainer
@@ -172,6 +176,7 @@ function GetAllData() {
         console.error("Error fetching data:", error);
     });
 }
+
 
 
 
