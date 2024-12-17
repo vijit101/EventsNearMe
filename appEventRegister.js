@@ -45,6 +45,7 @@ function SaveEventData() {
   let EventCategory = document.getElementById("EventCategory").value;
   let EventEndDate = document.getElementById("EventEndDate").value;
   let EventEndTime = document.getElementById("EventEndTime").value;
+  let age = document.getElementById("Age").value;
   set(ref(db,'Events/'+ EventName),{
     EventName:EventName,
     EventPincode:EventPincode,
@@ -53,7 +54,8 @@ function SaveEventData() {
     EventStartDate:EventStartDate,
     EventStartTime:EventStartTime,
     EventEndDate:EventEndDate,
-    EventEndTime:EventEndTime
+    EventEndTime:EventEndTime,
+    Age:age
   })
   alert("Event Saved");
   statusUpdate.innerText = "Status : Event Saved";
